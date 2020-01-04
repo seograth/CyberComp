@@ -22,8 +22,8 @@ export default function CharScreen() {
           <Image
             source={
               __DEV__
-                ? require('../assets/images/robot-dev.png')
-                : require('../assets/images/robot-prod.png')
+                ? require('../assets/images/logo-red.png')
+                : require('../assets/images/logo-red.png')
             }
             style={styles.welcomeImage}
           />
@@ -129,8 +129,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   welcomeImage: {
-    width: 100,
-    height: 80,
+    width: 400,
+    height: 150,
     resizeMode: 'contain',
     marginTop: 3,
     marginLeft: -10,
