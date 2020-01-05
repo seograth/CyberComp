@@ -1,41 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { SkillContainer } from "../components/SkillContainer";
+import { useSkills } from "../store";
 
 export default function SkillScreen() {
+  const skills = useSkills();
+  const [skillsT, setSkillsT] = useState([]);
+
+  useEffect(() => {
+    console.log(1);
+
+    const skillKeys = Object.keys(skills);
+
+    setSkillsT([
+      skillKeys.slice(0, Math.ceil(skillKeys.length / 2)),
+      skillKeys.slice(Math.ceil(skillKeys.length / 2), skillKeys.length)
+    ]);
+  }, []);
+
+  // console.log(useRef.current)
+
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.container}>
-
-        <View style={styles.skillContainer}>
-          <Text style={styles.text}>Perception(INT):</Text>
-          <Text style={styles.text}>Tracking(INT):</Text>
-          <Text style={styles.text}>Education(INT):</Text>
-          <Text style={styles.text}>Local Expert(INT):</Text>
-          <Text style={styles.text}>Interface(-):</Text>
-          <Text style={styles.text}>Marksmanship(REF):</Text>
-          <Text style={styles.text}>Driving(REF):</Text>
-          <Text style={styles.text}>Evasion(DEX):</Text>
-          <Text style={styles.text}>Athletics(DEX):</Text>
-          <Text style={styles.text}>Stealth(DEX):</Text>
-          <Text style={styles.text}>Brawling(DEX):</Text>
-          <Text style={styles.text}>Melee Weapon(DEX):</Text>
-          <Text style={styles.text}>Basic Tech(TECH):</Text>
-          <Text style={styles.text}>CyberTech(TECH):</Text>
-          <Text style={styles.text}>First Aid(TECH):</Text>
-          <Text style={styles.text}>Bribery(COOL):</Text>
-          <Text style={styles.text}>Interrogation(COOL):</Text>
-          <Text style={styles.text}>Persuasion(COOL):</Text>
-          <Text style={styles.text}>Evasion(WILL):</Text>
-          <Text style={styles.text}>Athletics(EMP):</Text>
-          <Text style={styles.text}>Stealth(EMP):</Text>
-          <Text style={styles.text}>Brawling(EMP):</Text>
+      {skillsT.map((col, i) => (
+        <View key={i} style={{ borderWidth: 1, borderColor: "red" }}>
+          {col.map(row => (
+            <SkillContainer key={row} skill={row} />
+          ))}
         </View>
-
-        <View style={styles.skillContainer}>
-          <Text style={styles.text}>Perception(INT):</Text>
-        </View>
-        
-      </ScrollView>
+      ))}
     </View>
   );
 }
@@ -54,7 +47,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "row",
-    backgroundColor: "#fff"
+    flexGrow: 1,
+    justifyContent: "space-evenly",
+    marginTop: 27
   },
   skillContainer: {
     flex: 1,
