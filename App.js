@@ -1,7 +1,7 @@
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Provider } from "react-redux";
@@ -12,15 +12,22 @@ import AppNavigator from "./navigation/AppNavigator";
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
 
-  if (!isLoadingComplete && !props.skipLoadingScreen) {
-    return (
-      <AppLoading
-        startAsync={loadResourcesAsync}
-        onError={handleLoadingError}
-        onFinish={() => handleFinishLoading(setLoadingComplete)}
-      />
-    );
-  } else {
+  useEffect(()=> {
+    loadResourcesAsync()
+    .then(() => setLoadingComplete(true))
+  }, []);
+
+  if (!isLoadingComplete) return <AppLoading/>;
+
+  // if (!isLoadingComplete && !props.skipLoadingScreen) {
+  //   return (
+  //     <AppLoading
+  //       startAsync={loadResourcesAsync}
+  //       onError={handleLoadingError}
+  //       onFinish={() => handleFinishLoading(setLoadingComplete)}
+  //     />
+  //   );
+  // } else {
     return (
       <Provider store={store}>
         <View style={styles.container}>
@@ -29,7 +36,7 @@ export default function App(props) {
         </View>
       </Provider>
     );
-  }
+  // }
 }
 
 async function loadResourcesAsync() {
