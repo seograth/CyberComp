@@ -4,11 +4,11 @@ import { SkillContainer } from "../components/SkillContainer";
 import { useSkills } from "../store";
 
 export default function SkillScreen() {
+  
   const skills = useSkills();
   const [skillsT, setSkillsT] = useState([]);
 
   useEffect(() => {
-    console.log(1);
 
     const skillKeys = Object.keys(skills);
 
@@ -17,8 +17,6 @@ export default function SkillScreen() {
       skillKeys.slice(Math.ceil(skillKeys.length / 2), skillKeys.length)
     ]);
   }, []);
-
-  // console.log(useRef.current)
 
   return (
     <View style={styles.container}>

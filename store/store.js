@@ -1,7 +1,8 @@
 import { createStore, combineReducers } from 'redux'
-import { skillsReducer } from './reducers'
+import { skillsReducer, charReducer } from './reducers'
 
 const character = combineReducers({
+    char: charReducer,
     skills: skillsReducer
 });
 

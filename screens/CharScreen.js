@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Image,
   Platform,
@@ -9,49 +9,38 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-
+import { useChar } from '../store';
 import { MonoText } from '../components/StyledText';
+import { CharContainer } from '../components/CharContainer';
 
 export default function CharScreen() {
+
+  const char = useChar();
+  const [charT, setCharT] = useState([]);
+
+  useEffect(() => {
+
+    const charKeys = Object.keys(char);
+
+    setCharT([
+      charKeys.slice(0, Math.ceil(charKeys.length / 2)),
+      charKeys.slice(Math.ceil(charKeys.length / 2), charKeys.length)
+    ]);
+  }, []);
+
+
   return (
     <View style={styles.container}>
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}>
-        <View style={styles.welcomeContainer}>
-          <Image
-            source={
-              __DEV__
-                ? require('../assets/images/logo-red.png')
-                : require('../assets/images/logo-red.png')
-            }
-            style={styles.welcomeImage}
-          />
-        </View>
-
-        <View style={styles.getStartedContainer}>
-          <DevelopmentModeNotice />
-
-          <Text style={styles.getStartedText}>Get started by opening</Text>
-
-          <View
-            style={[styles.codeHighlightContainer, styles.CharScreenFilename]}>
-            <MonoText>screens/CharScreen.js</MonoText>
-          </View>
-
-          <Text style={styles.getStartedText}>
-            Change this text and your app will automatically reload.
-          </Text>
-        </View>
-
-        <View style={styles.helpContainer}>
-          <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-            <Text style={styles.helpLinkText}>
-              Help, it didn’t automatically reload!
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
+      
+      <View style={styles.container}>
+        {charT.map((col, i) => (
+          <View key={i} style={{ borderWidth:1, borderColor: "red" }}>
+            {col.map(row => (
+              <CharContainer key={row} skill={row} />
+            ))}
+            </View>
+        ))}
+      </View>
 
       <View style={styles.tabBarInfoContainer}>
         <Text style={styles.tabBarInfoText}>

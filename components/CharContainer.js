@@ -1,10 +1,10 @@
 import React from "react";
 import { View, TextInput, Text } from "react-native";
-import { useSkills, skillEdit, useActions } from "../store";
+import { useChar, charEdit, useActions } from "../store";
 
-export function SkillContainer(props) {
-
-  const skill = useSkills(props.skill);
+export function CharContainer(props) {
+    
+  const char = useChar(props.char);
 
   return (
     <View
@@ -17,8 +17,8 @@ export function SkillContainer(props) {
         borderColor: "blue"
       }}
     >
-      <Text>{props.skill}:</Text>
-      <Text> {skill}</Text>
+      <Text>{props.char}:</Text>
+      <Text>{char}</Text>
     </View>
   );
 }
