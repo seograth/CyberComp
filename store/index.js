@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 
 export * from './selectors'
 export * from './store'
-export { skillEdit, charEdit } from './actions'
+export { skillEdit, charEdit, playerEdit } from './actions'
 
 export function useActions(actions, deps) {
     const dispatch = useDispatch()

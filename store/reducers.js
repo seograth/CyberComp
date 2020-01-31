@@ -1,4 +1,4 @@
-import { SKILL_EDIT, CHAR_EDIT } from "./actions";
+import { SKILL_EDIT, CHAR_EDIT, PLAYER_EDIT } from "./actions";
 
 const initialCharState = {
   Name: "Type a kewl name!!",
@@ -40,6 +40,11 @@ const initialSkillState = {
   playInstrument: "2"
 };
 
+const initialPlayerState = {
+  startingHP: "40",
+  woundedHP: "20",
+  deathSave: "2"
+}
 
 export function charReducer(previousState = initialCharState, action) {
   switch (action.type) {
@@ -56,6 +61,18 @@ export function charReducer(previousState = initialCharState, action) {
 export function skillsReducer(previousState = initialSkillState, action) {
   switch (action.type) {
     case SKILL_EDIT:
+      return {
+        ...previousState,
+        [action.payload.skill]: action.payload.value
+      };
+    default:
+      return previousState;
+  }
+}
+
+export function playerReducer(previousState = initialPlayerState, action) {
+  switch (action.type) {
+    case PLAYER_EDIT:
       return {
         ...previousState,
         [action.payload.skill]: action.payload.value
