@@ -36,12 +36,6 @@ SkillScreen.navigationOptions = {
 };
 
 const styles = StyleSheet.create({
-  welcomeContainer: {
-    flex: 1,
-    alignItems: "center",
-    marginTop: 10,
-    marginBottom: 20
-  },
   container: {
     flex: 1,
     flexDirection: "row",

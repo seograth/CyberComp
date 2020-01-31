@@ -1,18 +1,18 @@
 import { SKILL_EDIT, CHAR_EDIT } from "./actions";
 
 const initialCharState = {
-  name: "Type a kewl name!!",
-  class: "Pick your class",
-  int: "3",
-  ref: "3",
-  dex: "3",
-  tech: "3",
-  cool: "3",
-  will: "3",
-  luck: "3",
-  move: "3",
-  body: "3",
-  emp: "3"
+  Name: "Type a kewl name!!",
+  INT: "3",
+  REF: "3",
+  DEX: "3",
+  TECH: "3",
+  COOL: "3",
+  Class: "Pick your class",
+  WILL: "3",
+  LUCK: "3",
+  MOVE: "3",
+  BODY: "3",
+  EMP: "3"
 };
 
 const initialSkillState = {
@@ -39,6 +39,7 @@ const initialSkillState = {
   humanPerception: "2",
   playInstrument: "2"
 };
+
 
 export function charReducer(previousState = initialCharState, action) {
   switch (action.type) {
