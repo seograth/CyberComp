@@ -7,6 +7,8 @@ import TabBarIcon from "../components/TabBarIcon";
 import CharScreen from "../screens/CharScreen";
 import SkillScreen from "../screens/SkillScreen";
 import CombatScreen from "../screens/CombatScreen";
+import ItemScreen from "../screens/ItemScreen";
+
 
 const config = Platform.select({
   web: { headerMode: "screen" },
@@ -15,7 +17,7 @@ const config = Platform.select({
 
 const CharStack = createStackNavigator(
   {
-    Home: CharScreen
+    Char: CharScreen
   },
   config
 );
@@ -36,7 +38,7 @@ CharStack.path = "";
 
 const SkillStack = createStackNavigator(
   {
-    Links: SkillScreen
+    Skills: SkillScreen
   },
   config
 );
@@ -55,7 +57,7 @@ SkillScreen.path = "";
 
 const CombatStack = createStackNavigator(
   {
-    Settings: CombatScreen
+    Combat: CombatScreen
   },
   config
 );
@@ -72,10 +74,30 @@ CombatStack.navigationOptions = {
 
 CombatScreen.path = "";
 
+const ItemStack = createStackNavigator(
+  {
+    Items: ItemScreen
+  },
+  config
+);
+
+CombatStack.navigationOptions = {
+  tabBarLabel: "Item",
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === "ios" ? "ios-hammer" : "md-hammer"}
+    />
+  )
+};
+
+ItemScreen.path = "";
+
 const tabNavigator = createBottomTabNavigator({
   CharStack,
-  SkillScreen,
-  CombatScreen
+  SkillStack,
+  CombatStack,
+  ItemStack
 },{
   tabBarOptions: {
     activeTintColor: "#d00000"

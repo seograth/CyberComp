@@ -6,13 +6,16 @@ import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
+import { initDB } from "./store/redb";
 
 import AppNavigator from "./navigation/AppNavigator";
 
 export default function App(props) {
+
   const [isLoadingComplete, setLoadingComplete] = useState(false);
 
   useEffect(()=> {
+    initDB();
     loadResourcesAsync()
     .then(() => setLoadingComplete(true))
   }, []);

@@ -1,18 +1,18 @@
 import { SKILL_EDIT, CHAR_EDIT, PLAYER_EDIT } from "./actions";
 
 const initialCharState = {
-  Name: "Type a kewl name!!",
-  INT: "3",
-  REF: "3",
-  DEX: "3",
-  TECH: "3",
-  COOL: "3",
-  Class: "Pick your class",
-  WILL: "3",
-  LUCK: "3",
-  MOVE: "3",
-  BODY: "3",
-  EMP: "3"
+  name: "Type a kewl name!!",
+  class: "Pick your class",
+  int: "3",
+  ref: "3",
+  dex: "3",
+  tech: "3",
+  cool: "3",
+  will: "3",
+  luck: "3",
+  move: "3",
+  body: "3",
+  emp: "3"
 };
 
 const initialSkillState = {
@@ -53,8 +53,8 @@ export function charReducer(previousState = initialCharState, action) {
         ...previousState,
         [action.payload.char]: action.payload.value
       };
-    default:
-      return previousState;
+      default:
+        return previousState;
   }
 }
 

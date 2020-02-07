@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-
-import * as SQLite from 'expo-sqlite';
-
 import { PlayerContainer } from "../components/PlayerContainer";
 import { usePlayer } from "../store";
-
-// const db = SQLite.openDatabase(redDB);
 
 export default function CombatScreen() {
   
