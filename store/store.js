@@ -1,5 +1,10 @@
-import { createStore, combineReducers } from 'redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { skillsReducer, charReducer, playerReducer } from './reducers'
+import createSagaMiddleware from 'redux-saga';
+
+import { test } from "./sagas";
+
+const sagaMiddleware = createSagaMiddleware();
 
 const character = combineReducers({
     char: charReducer,
@@ -7,4 +12,13 @@ const character = combineReducers({
     player: playerReducer
 });
 
-export const store = createStore(character);
+export const store = createStore(
+    character,
+     applyMiddleware(sagaMiddleware)
+    );
+
+sagaMiddleware.run(test);
+
+
+
+    

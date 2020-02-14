@@ -1,58 +1,57 @@
-import { SKILL_EDIT, CHAR_EDIT, PLAYER_EDIT } from "./actions";
+import { SKILL_EDIT, CHAR_EDIT, CHAR_CREATE, PLAYER_EDIT } from "./actions";
 
 const initialCharState = {
-  name: "Type a kewl name!!",
-  class: "Pick your class",
-  int: "3",
-  ref: "3",
-  dex: "3",
-  tech: "3",
-  cool: "3",
-  will: "3",
-  luck: "3",
-  move: "3",
-  body: "3",
-  emp: "3"
+  name: "",
+  class: "",
+  int: "1",
+  ref: "1",
+  dex: "1",
+  tech: "1",
+  cool: "1",
+  will: "1",
+  luck: "1",
+  move: "1",
+  body: "1",
+  emp: "1"
 };
 
 const initialSkillState = {
-  perception: "2",
-  tracking: "2",
-  education: "2",
-  localExpert: "2",
-  interface: "2",
-  marksmanship: "2",
-  driving: "2",
-  evasion: "2",
-  athletics: "2",
-  stealth: "2",
-  brawling: "2",
-  meleeWeapon: "2",
-  basicTech: "2",
-  cyberTech: "2",
-  firstAid: "2",
-  bribery: "2",
-  interrogation: "2",
-  persuasion: "2",
-  concetration: "2",
-  conversation: "2",
-  humanPerception: "2",
-  playInstrument: "2"
+  perception: "0",
+  tracking: "0",
+  education: "0",
+  localExpert: "0",
+  interface: "0",
+  marksmanship: "0",
+  driving: "0",
+  evasion: "0",
+  athletics: "0",
+  stealth: "0",
+  brawling: "0",
+  meleeWeapon: "0",
+  basicTech: "0",
+  cyberTech: "0",
+  firstAid: "0",
+  bribery: "0",
+  interrogation: "0",
+  persuasion: "0",
+  concetration: "0",
+  conversation: "0",
+  humanPerception: "0",
+  playInstrument: "0"
 };
 
 const initialPlayerState = {
-  startingHP: "40",
-  woundedHP: "20",
-  deathSave: "2"
+  startingHP: "0",
+  woundedHP: "0",
+  deathSave: "0"
 }
 
 export function charReducer(previousState = initialCharState, action) {
   switch (action.type) {
+    case CHAR_CREATE:
+      return action.payload;
     case CHAR_EDIT:
-      return {
-        ...previousState,
-        [action.payload.char]: action.payload.value
-      };
+      return action.payload;
       default:
         return previousState;
   }
@@ -71,6 +70,7 @@ export function skillsReducer(previousState = initialSkillState, action) {
 }
 
 export function playerReducer(previousState = initialPlayerState, action) {
+  console.log(action);
   switch (action.type) {
     case PLAYER_EDIT:
       return {

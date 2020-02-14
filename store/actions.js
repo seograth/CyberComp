@@ -1,5 +1,6 @@
 export const SKILL_EDIT = 'SKILL_EDIT'
 export const CHAR_EDIT = 'CHAR_EDIT'
+export const CHAR_CREATE = 'CHAR_CREATE'
 export const PLAYER_EDIT = 'PLAYER_EDIT'
 
 export function skillEdit (payload) {
@@ -8,6 +9,10 @@ export function skillEdit (payload) {
 
 export function charEdit (payload) {
     return {type: CHAR_EDIT, payload}
+}
+
+export function charCreate (payload) {
+    return {type: CHAR_CREATE, payload}
 }
 
 export function playerEdit (payload) {

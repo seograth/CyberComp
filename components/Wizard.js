@@ -45,7 +45,7 @@ class Wizard extends PureComponent {
   };
 
   render() {
-    console.log('values', this.state);
+    // console.log('values', this.state);
     return (
       <View style={{ flex: 1 }}>
         {React.Children.map(this.props.children, (el, index) => {

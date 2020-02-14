@@ -5,7 +5,7 @@ import logo from '../assets/images/logo-red.png';
 export default function EntryScreen(props) {
   
   const showMoreApp = () => {
-    props.navigation.navigate('New');
+    props.navigation.navigate('Main');
   };
 
   return (    
