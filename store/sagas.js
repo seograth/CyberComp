@@ -1,8 +1,9 @@
 import { SKILL_EDIT, CHAR_EDIT, CHAR_CREATE, PLAYER_EDIT } from "./actions";
-import { takeEvery } from 'redux-saga/effects'
+import { fork, takeEvery } from 'redux-saga/effects'
+import { statInsert } from "./redb";
 
-export function* test() {
-    yield takeEvery('*', function* (action) {
-        console.log('sagaetsi', action)
+export function* charCreate() {
+    yield takeEvery(CHAR_CREATE, function* (action) {
+        const loadDb = yield fork(statInsert, action.payload)
     })
 }

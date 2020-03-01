@@ -12,7 +12,7 @@
 // https://stackoverflow.com/questions/51269672/how-to-build-multi-step-form
 
 import React from 'react';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TextInput, ShadowPropTypesIOS } from 'react-native';
 
 import Wizard from '../components/Wizard';
 import Input from '../components/WizardInput';
@@ -25,14 +25,55 @@ const forms = [
   {
     placeholder: 'Choose a Class...',
     name: 'class',
+  },
+  {
+    placeholder: 'Intellect',
+    name: 'int',
+  },
+  {
+    placeholder: 'Reflex',
+    name: 'ref',
+  },
+  {
+    placeholder: 'Dexterity',
+    name: 'dex',
+  },
+  {
+    placeholder: 'Technology',
+    name: 'tech',
+  },
+  {
+    placeholder: 'Coolness',
+    name: 'cool',
+  },
+  {
+    placeholder: 'Willpower',
+    name: 'will',
+  },
+  {
+    placeholder: 'Luck',
+    name: 'luck',
+  },
+  {
+    placeholder: 'Movement',
+    name: 'move',
+  },
+  {
+    placeholder: 'Body',
+    name: 'body',
+  },
+  {
+    placeholder: 'Empathy',
+    name: 'emp',
   }
 ];
 
 
-export default function NewCharacter() {
+export default function NewCharacter(props) {
     return (
       <View style={styles.root}>
-        <Wizard
+        <Wizard 
+          navigation={props.navigation}
           initialValues={{
             name: '',
             class: ''

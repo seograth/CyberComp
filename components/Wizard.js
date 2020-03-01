@@ -1,71 +1,64 @@
-import React, { PureComponent } from 'react';
-import { View, Text, Button, Alert } from 'react-native';
+import React, { PureComponent, useState } from "react";
+import { View, Text, Button, Alert } from "react-native";
+import { charCreate, useActions, charEdit } from "../store";
+import Step from "./WizardStep";
 
-import Step from './WizardStep';
+function Wizard(props) {
+  const [index, setIndex] = useState(0);
+  const [values, setValues] = useState({ ...props.initialValues });
 
-class Wizard extends PureComponent {
-  static Step = Step;
+  const actions = useActions({ charCreate }, [charCreate]);
 
-  state = {
-    index: 0,
-
-    values: {
-      ...this.props.initialValues,
-    },
+  const showMoreApp = () => {
+    props.navigation.navigate('Main');
   };
 
-  _nextStep = () => {
-    if (this.state.index !== this.props.children.length - 1) {
-      this.setState(prevState => ({
-        index: prevState.index + 1,
-      }));
+  const _nextStep = () => {
+    if (index !== props.children.length - 1) {
+      setIndex(index + 1);
     }
   };
 
-  _prevStep = () => {
-    if (this.state.index !== 0) {
-      this.setState(prevState => ({
-        index: prevState.index - 1,
-      }));
+  const _prevStep = () => {
+    if (index !== 0) {
+      setIndex(index - 1);
     }
   };
 
-  _onChangeValue = (name, value) => {
-    this.setState(prevState => ({
-      values: {
-        ...prevState.values,
-        [name]: value,
-      },
-    }));
+  const _onChangeValue = (name, value) => {
+    setValues({
+      ...values,
+      [name]: value
+    });
   };
 
-  _onSubmit = () => {
-    Alert.alert(JSON.stringify(this.state.values));
-    //write data to the db <--> call actions 
+  const _onSubmit = () => {
+    showMoreApp();
+    actions.charCreate(values);
   };
 
-  render() {
-    // console.log('values', this.state);
-    return (
-      <View style={{ flex: 1 }}>
-        {React.Children.map(this.props.children, (el, index) => {
-          if (index === this.state.index) {
-            return React.cloneElement(el, {
-              currentIndex: this.state.index,
-              nextStep: this._nextStep,
-              prevStep: this._prevStep,
-              isLast: this.state.index === this.props.children.length - 1,
-              onChangeValue: this._onChangeValue,
-              values: this.state.values,
-              onSubmit: this._onSubmit,
-            });
-          }
-
-          return null;
-        })}
-      </View>
-    );
-  }
+  return (
+    <View style={{ flex: 1 }}>
+      {React.Children.map(props.children, (el, i) => {
+        if (i === index) {
+          return React.cloneElement(el, {
+            currentIndex: index,
+            nextStep: _nextStep,
+            prevStep: _prevStep,
+            isLast: index === props.children.length - 1,
+            onChangeValue: _onChangeValue,
+            values: values,
+            onSubmit: _onSubmit
+          });
+        }
+        return null;
+      })}
+    </View>
+  );
 }
+
+Object.defineProperty(Wizard, 'Step', {
+  value: Step
+})
 
 export default Wizard;

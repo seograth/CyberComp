@@ -48,12 +48,14 @@ function statTable() {
 }
 
 export function statInsert(char) {
-    redb.transaction(tx => {
-        tx.executeSql(
-            `insert into stat (name, class, int, ref, dex, tech, cool, will, luck , move, body, emp) values (${char.name}, 
-                ${char.class}, ${char.int}, ${char.ref}, ${char.dex}, ${char.tech}, ${char.cool}, ${char.will}, ${char.luck}, ${char.move}, ${char.body}, 
-                ${char.emp})`
-        );
+    return new Promise((resolve, reject) => {
+        redb.transaction(tx => {
+            tx.executeSql(
+                `insert into stat (name, class, int, ref, dex, tech, cool, will, luck , move, body, emp) values (${char.name}, 
+                    ${char.class}, ${char.int}, ${char.ref}, ${char.dex}, ${char.tech}, ${char.cool}, ${char.will}, ${char.luck}, ${char.move}, ${char.body}, 
+                    ${char.emp})`
+            );
+        }, reject, resolve)
     })
 }
 
